@@ -9,7 +9,7 @@
 // DONORS LIST: None.
 //
 namespace saiini\tv;
-use pocketmine\event\player\PlayerInteractEvent;
+use pocketmine\event\player\PlayerItemHeldEvent;
 use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
@@ -30,14 +30,14 @@ class Main extends PluginBase implements Listener
     /**
      * @param PlayerInteractEvent $e
      */
-    public function onint(PlayerInteractEvent $e){
+    public function onheld(PlayerItemHeldEvent $e){
         $playername = $e->getPlayer();
-        $item= $e->getBlock();
+        $item = $e->getBlock();
         if(PlayerInteractEvent::PHYSICAL){
             $playername = $e->getPlayer();
-            $item= $e->getBlock()->getItemId();
+            $item = $e->getBlock()->getName();
             /** @var Item $item */
-            $e->getPlayer()->addActionBarMessage('§b§o§l•[Item-ID] -> '.$item.'•');
+            $e->getPlayer()->setMessage('§b§o§l•[Item-Name] -> '.$item.'•');
         }
     }
 }
